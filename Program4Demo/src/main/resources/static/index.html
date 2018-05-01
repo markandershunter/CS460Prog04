@@ -5,16 +5,79 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>
-	What's your name?
+
 	<br>
 	<input id="text" type="text" name="name">
     <br>
     Get your greeting <button type="submit" onclick="getGreeting()">here</button>
-    </h1>
+
 </form>
-Sname: <input id = "sname">
-<button onclick="getSname()">query</button>
+Sname: <input id = "random">
+<button onclick="query1()">query1</button>
+<button onclick="query2()">query2</button>
+<button onclick="query3()">query3</button>
+<button onclick="query4()">query4</button>
+<button onclick="query5()">query5</button>
+
+
+<br>
+<b>Add Student:</b>
+<br>
+ID: <input id="sid"><br>
+name: <input id="sname"><br>
+homeAddr: <input id="shome"><br>
+phone: <input id="sphone"><br>
+email: <input id="semail"><br>
+gender: <input id="sgender"><br>
+DOB: <input id="sdob"><br>
+category: <input id="scategory"><br>
+major: <input id="smajor"><br>
+minor: <input id="sminor"><br>
+adviserID: <input id="sadviser"><br>
+<button onclick="addstudent()">Add Student</button>
+
+
+
+<br>
+<br>
+<br>
+<b>Add Staff:</b>
+<br>
+ID: <input id="staid"><br>
+name: <input id="staname"><br>
+buildingNum: <input id="stabuild"><br>
+email: <input id="staemail"><br>
+homeAddr: <input id="stahome"><br>
+DOB: <input id="stadob"><br>
+gender: <input id="stagender"><br>
+title: <input id="statitle"><br>
+<button onclick="addstaff()">Add Staff</button>
+
+
+<br><br><br>
+<b>Add Lease:</b>
+<br>
+StudentID: <input id="lid"><br>
+roomNum: <input id="lroom"><br>
+buildingNum: <input id="lbuild"><br>
+<button>Add Lease</button>
+
+<br><br><br>
+<b>Update Rent:</b>
+<br>
+roomNum: <input id="rroom"><br>
+buildingNum: <input id="rbuild"><br>
+new rent: <input id="rrent"><br>
+<button>Update Rent</button>
+
+<br><br><br>
+<b>Delete Student:</b>
+<br>
+StudentID: <input id="did"><br>
+<button>Delete Student</button>
+
+
+
 <script type="text/javascript">
 	function getGreeting(){
 		var value = document.getElementById('text').value;
@@ -22,9 +85,80 @@ Sname: <input id = "sname">
 		window.location.href = "/greeting?name=" + value;
 	}
 
-  function getSname(){
+  function query1(){
     // var snameToQ = document.getElementById('sname').value;
     window.location.href = "/query1";
+  }
+
+  function query2(){
+    // var snameToQ = document.getElementById('sname').value;
+    window.location.href = "/query2";
+  }
+
+  function query3(){
+    // var snameToQ = document.getElementById('sname').value;
+    window.location.href = "/query3";
+  }
+
+  function query4(){
+    // var snameToQ = document.getElementById('sname').value;
+    window.location.href = "/query4";
+  }
+
+  function query5(){
+    // var snameToQ = document.getElementById('sname').value;
+    window.location.href = "/query5";
+  }
+
+  function addstudent(){
+    var sid = document.getElementById('sid').value;
+    var sname = document.getElementById('sname').value;
+    var shome = document.getElementById('shome').value;
+    var sphone = document.getElementById('sphone').value;
+    var semail = document.getElementById('semail').value;
+    var sgender = document.getElementById('sgender').value;
+    var sdob = document.getElementById('sdob').value;
+    var scategory = document.getElementById('scategory').value;
+    var smajor = document.getElementById('smajor').value;
+    var sminor = document.getElementById('sminor').value;
+    var sadviser = document.getElementById('sadviser').value;
+    window.location.href = "/addstudent?sid="+sid+"&sname=" + sname+"&shome="+shome
+    +"&sphone="+sphone+"&semail="+semail+"&sgender="+sgender+"&sdob="+sdob
+    +"&scategory="+scategory+"&smajor="+smajor+"&sminor="+sminor+"&sadviser="+sadviser;
+  }
+
+  function addstaff(){
+    var staid = document.getElementById('staid').value;
+    var staname = document.getElementById('staname').value;
+    var stabuild = document.getElementById('stabuild').value;
+    var staemail = document.getElementById('staemail').value;
+    var stahome = document.getElementById('stahome').value;
+    var stadob = document.getElementById('stadob').value;
+    var stagender = document.getElementById('stagender').value;
+    var statitle = document.getElementById('statitle').value;
+
+    window.location.href = "/addstaff?staid=" + staid +"&staname=" + staname+"&stabuild=" + stabuild+
+    "&staemail=" + staemail+"&stahome=" + stahome+"&stadob=" + stadob+"&stagender="
+    + stagender+"&statitle=" + statitle;
+  }
+
+  function addlease(){
+    var lid = document.getElementById('lid').value;
+    var lroom = document.getElementById('lroom').value;
+    var lbuild = document.getElementById('lbuild').value;
+    window.location.href = "/addlease?lid=" + lid +"&lroom=" + lroom+"&lbuild=" + lbuild;
+
+  }
+
+  function updaterent(){
+    var rroom = document.getElementById('rroom').value;
+    var rbuild = document.getElementById('rbuild').value;
+    var rrent = document.getElementById('rrent').value;
+
+  }
+
+  function deletestudent(){
+    var did = document.getElementById('did').value;
   }
 </script>
 </body>
