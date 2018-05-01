@@ -1,0 +1,2 @@
+-staff and inspection connected
+-studentName only in Student -- only studentId stored in Lease
