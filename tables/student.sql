@@ -6,7 +6,7 @@ phone_num varchar(20),
 email varchar(50),
 gender varchar(20),
 dob varchar(15),
-category number(2),
+category varchar(15),
 major varchar(20),
 minor varchar(20),
 adviser_id number(4)
