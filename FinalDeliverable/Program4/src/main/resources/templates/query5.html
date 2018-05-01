@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<style>
+.col1{
+  width: 100px;
+  float: left;
+}
+.col2{
+  width: 100px;
+  float: left;
+}
+
+</style>
+<body>
+<p>Names of Chemistry Advisers</p>
+  <div class="col1">
+    <table>
+      <tr>
+        <th>Student Names</th>
+
+      </tr>
+      <tr th:each="q : ${names}">
+        <td th:text="${q}"></td>
+
+      </tr>
+    </table>
+</div>
+
+</body>
+</html>

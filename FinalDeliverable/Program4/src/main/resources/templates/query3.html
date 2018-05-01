@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<style>
+.col1{
+  width: 100px;
+  float: left;
+}
+.col2{
+  width: 100px;
+  float: left;
+}
+.col3{
+  width: 100px;
+  float: left;
+}
+.col4{
+  width: 100px;
+  float: left;
+}
+
+</style>
+<body>
+
+  <div class="col1">
+    <table>
+      <tr>
+        <th>Name</th>
+
+      </tr>
+
+      <tr th:each="q : ${names}">
+        <td th:text="${q}"></td>
+
+      </tr>
+
+    </table>
+</div>
+    <div class="col2">
+    <table>
+      <tr>
+
+        <th>Room Num</th>
+      </tr>
+      <tr th:each="q : ${ids}">
+        <td th:text="${q}"></td>
+
+      </tr>
+    </table>
+  </div>
+
+  <div class="col3">
+  <table>
+    <tr>
+
+      <th>BuildingNum</th>
+    </tr>
+    <tr th:each="q : ${bids}">
+      <td th:text="${q}"></td>
+
+    </tr>
+  </table>
+</div>
+
+<div class="col4">
+<table>
+  <tr>
+
+    <th>AmountDue</th>
+  </tr>
+  <tr th:each="q : ${amt}">
+    <td th:text="${q}"></td>
+
+  </tr>
+</table>
+</div>
+Total amount:
+<p th:text="${total}"></p>
+
+</body>
+</html>

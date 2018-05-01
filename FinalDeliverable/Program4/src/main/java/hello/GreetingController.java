@@ -81,42 +81,99 @@ public class GreetingController {
 // 		// jdbcTemplate.update(sql, name);
 // 		return "query1";
 
+
+@GetMapping("/query3")
+public String query3(Model model) {
+		String sql = "select student.name,lease.building_num,lease.room_num,invoice.amount_due from student,lease,invoice where lease.student_id = id_num and invoice.lease_num = lease.lease_num and id_num in (select student_id from lease where lease.lease_num in (select lease_num from invoice where date_paid = '-'))";
+
+
+		List<Row> ans = jdbcTemplate.query(sql, new RowMapper<Row>(){
+
+				public Row mapRow(ResultSet rs, int rownum)
+								throws SQLException {
+						Row r = new Row(rs.getString("name"),rs.getInt("room_num"),rs.getInt("building_num"),rs.getInt("amount_due"));
+						return r;
+				}
+
+		});
+
+
+					ArrayList<Integer> ids = new ArrayList<Integer>();
+					ArrayList<Integer> bids = new ArrayList<Integer>();
+					ArrayList<Integer> amt = new ArrayList<Integer>();
+					ArrayList<String> names = new ArrayList<String>();
+					for(int i = 0; i < ans.size(); i++){
+						ids.add(ans.get(i).rnum);
+						bids.add(ans.get(i).bnum);
+						names.add(ans.get(i).name);
+						amt.add(ans.get(i).amount);
+					}
+
+
+
+model.addAttribute("amt", amt);
+model.addAttribute("ids", ids);
+model.addAttribute("names", names);
+model.addAttribute("bids", bids);
+sql = "select sum(amount_due) from invoice where date_paid='-'";
+List<Integer> rent =jdbcTemplate.queryForList(sql,Integer.class);
+model.addAttribute("total", rent.get(0));
+		return "query3";
+}//query3
+
+
+@GetMapping("/query4")
+public String query4(@RequestParam(name="major") String major, Model model) {
+		String sql = "select name from student where major='"+major+"'";
+List<String> names =jdbcTemplate.queryForList(sql,String.class);
+model.addAttribute("names",names);
+model.addAttribute("major",major);
+		return "query4";
+}//query4
+
+@GetMapping("/query5")
+public String query5(Model model) {
+		String sql = "select name from adviser where id_num in (select distinct adviser_id from student where student.major = 'Chemistry')";
+List<String> names =jdbcTemplate.queryForList(sql,String.class);
+model.addAttribute("names",names);
+
+		return "query5";
+}//query5
+
+
 @GetMapping("/query2")
 public String query2(Model model) {
-		String sql = "select count(category) from student
-   join lease on id_num=student_id
-   join room on lease.building_num=room.building_num and lease.room_num=room.room_num
-   join building on building.building_num=room.building_num
-   where building.type='apartment' and student.category='undergrad'";
+
+		String sql = "select count(category) from student join lease on id_num=student_id "+
+   "join room on lease.building_num=room.building_num and lease.room_num=room.room_num "+
+   "join building on building.building_num=room.building_num "+
+   "where building.type='apartment' and student.category='undergrad'";
 
 List<Integer> rent =jdbcTemplate.queryForList(sql,Integer.class);
 model.addAttribute("aptunder", rent.get(0));
 
-sql = "select count(category) from student
-   join lease on id_num=student_id
-   join room on lease.building_num=room.building_num and lease.room_num=room.room_num
-   join building on building.building_num=room.building_num
-   where building.type='res_hall' and student.category='undergrad'";
+sql = "select count(category) from student join lease on id_num=student_id "+
+   "join room on lease.building_num=room.building_num and lease.room_num=room.room_num "+
+   "join building on building.building_num=room.building_num "+
+  "where building.type='res_hall' and student.category='undergrad'";
 
-List<Integer> rent =jdbcTemplate.queryForList(sql,Integer.class);
+rent =jdbcTemplate.queryForList(sql,Integer.class);
 model.addAttribute("resunder", rent.get(0));
 
-sql = "select count(category) from student
-   join lease on id_num=student_id
-   join room on lease.building_num=room.building_num and lease.room_num=room.room_num
-   join building on building.building_num=room.building_num
-   where building.type='res_hall' and student.category='postgrad'";
+sql = "select count(category) from student join lease on id_num=student_id "+
+   "join room on lease.building_num=room.building_num and lease.room_num=room.room_num "+
+   "join building on building.building_num=room.building_num "+
+   "where building.type='res_hall' and student.category='postgrad'";
 
-List<Integer> rent =jdbcTemplate.queryForList(sql,Integer.class);
+rent =jdbcTemplate.queryForList(sql,Integer.class);
 model.addAttribute("respost", rent.get(0));
 
-sql = "select count(category) from student
-   join lease on id_num=student_id
-   join room on lease.building_num=room.building_num and lease.room_num=room.room_num
-   join building on building.building_num=room.building_num
-   where building.type='apartment' and student.category='postgrad'";
+sql = "select count(category) from student join lease on id_num=student_id "+
+   "join room on lease.building_num=room.building_num and lease.room_num=room.room_num "+
+   "join building on building.building_num=room.building_num "+
+   "where building.type='apartment' and student.category='postgrad'";
 
-List<Integer> rent =jdbcTemplate.queryForList(sql,Integer.class);
+rent =jdbcTemplate.queryForList(sql,Integer.class);
 model.addAttribute("aptpost", rent.get(0));
 
 		return "query2";
@@ -124,15 +181,14 @@ model.addAttribute("aptpost", rent.get(0));
 
 		@GetMapping("/query1")
 		public String query1(Model model) {
-				String sql = "select staff.name, phone_num from resHallInfo
-   join staff using (staff_id)";
+				String sql = "select staff.name, phone_num from resHallInfo join staff using (staff_id)";
 
 
 				List<StrRow> ans = jdbcTemplate.query(sql, new RowMapper<StrRow>(){
 
             public StrRow mapRow(ResultSet rs, int rownum)
                     throws SQLException {
-                StrRow r = new StrRow(rs.getString("staff.name"),rs.getString("phone_num"));
+                StrRow r = new StrRow(rs.getString("name"),rs.getString("phone_num"));
                 return r;
             }
 

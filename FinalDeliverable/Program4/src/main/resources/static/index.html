@@ -6,7 +6,7 @@
 </head>
 <body>
 
-	
+
 <button onclick="query1()">query1</button>
 <button onclick="query2()">query2</button>
 <button onclick="query3()">query3</button>
@@ -84,22 +84,19 @@ StudentID: <input id="did"><br>
   }
 
   function query2(){
-    // var snameToQ = document.getElementById('sname').value;
     window.location.href = "/query2";
   }
 
   function query3(){
-    // var snameToQ = document.getElementById('sname').value;
     window.location.href = "/query3";
   }
 
   function query4(){
-    // var snameToQ = document.getElementById('sname').value;
-    window.location.href = "/query4";
+    var majorField = document.getElementById('major').value;
+    window.location.href = "/query4?major="+majorField;
   }
 
   function query5(){
-    // var snameToQ = document.getElementById('sname').value;
     window.location.href = "/query5";
   }
 
