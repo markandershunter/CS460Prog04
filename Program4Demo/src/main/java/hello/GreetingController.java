@@ -135,8 +135,9 @@ public class GreetingController {
 
 				model.addAttribute("sname", sname);
 				model.addAttribute("shome", shome);
-        // String sql = "insert into aakashrathore.people values (?)";
-        // jdbcTemplate.update(sql, sname);
+        String sql = "insert into student values (?,?,?,?,?,?,?,?,?,?,?)";
+        jdbcTemplate.update(sql, sid, sname, shome, sphone, semail, sgender, sdob, scategory,
+				smajor, sminor, sadviser);
         return "addstudent";
     }
 
@@ -148,10 +149,9 @@ public class GreetingController {
 		@RequestParam(name="stagender") String stagender, @RequestParam(name="statitle") String statitle,
 		Model model) {
 
-				// model.addAttribute("sname", sname);
-				// model.addAttribute("shome", shome);
-        // String sql = "insert into aakashrathore.people values (?)";
-        // jdbcTemplate.update(sql, sname);
+			  model.addAttribute("sname", staname);
+				String sql = "insert into staff values (?,?,?,?,?,?,?,?)";
+        jdbcTemplate.update(sql, staid, stabuild, staname, staemail, stahome, stadob, stagender, statitle);
         return "addstudent";
     }
 
@@ -159,10 +159,11 @@ public class GreetingController {
     public String addlease(@RequestParam(name="lid") String lid, @RequestParam(name="lroom") String lroom,
 		@RequestParam(name="lbuild") String lbuild, Model model) {
 
-				// model.addAttribute("sname", sname);
-				// model.addAttribute("shome", shome);
-        // String sql = "insert into aakashrathore.people values (?)";
-        // jdbcTemplate.update(sql, sname);
+				model.addAttribute("sname", lid);
+				//query for monthly rent first
+				//
+				// String sql = "insert into lease values (?,?,?,?,?,?)";
+        // jdbcTemplate.update(sql, 10, 2, lid, lbuild, lroom, 700);
         return "addstudent";
     }
 

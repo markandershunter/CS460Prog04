@@ -137,13 +137,16 @@ StudentID: <input id="did"><br>
     var stagender = document.getElementById('stagender').value;
     var statitle = document.getElementById('statitle').value;
 
-    window.location.href = "/addstudent?name=" + value;
+    window.location.href = "/addstaff?staid=" + staid +"&staname=" + staname+"&stabuild=" + stabuild+
+    "&staemail=" + staemail+"&stahome=" + stahome+"&stadob=" + stadob+"&stagender="
+    + stagender+"&statitle=" + statitle;
   }
 
   function addlease(){
     var lid = document.getElementById('lid').value;
     var lroom = document.getElementById('lroom').value;
     var lbuild = document.getElementById('lbuild').value;
+    window.location.href = "/addlease?lid=" + lid +"&lroom=" + lroom+"&lbuild=" + lbuild;
 
   }
 
